@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#064e3b">
+  <meta name="description" content="PayPlan helps you plan paychecks, manage bills, and estimate what you can safely spend.">
+  <title>PayPlan — Your money. Your plan.</title>
+  <style>
+    :root{--green:#064e3b;--green2:#16a36a;--bg:#f5f8f6;--text:#17251e;--muted:#718078;--border:#e2eae4;--white:#fff;--warning:#a84b13;--warningbg:#fff4e9}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}button,input{font:inherit}button{cursor:pointer}
+    header{min-height:76px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px max(20px,calc((100% - 1160px)/2))}
+    .brand{display:flex;align-items:center;gap:11px;color:var(--green);font-size:25px;font-weight:800;letter-spacing:-1px}.brand img{width:42px;height:42px;object-fit:contain}.brand-mark{width:42px;height:42px;border-radius:12px;background:var(--green);display:grid;place-items:center;color:white;font-size:26px;font-weight:800}.tagline{display:block;font-size:10px;font-weight:500;letter-spacing:.1px;color:var(--muted)}
+    .demo{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--green);background:#e8f5ed;padding:8px 11px;border-radius:30px}
+    main{max-width:1160px;margin:auto;padding:34px 22px 56px}.welcome{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:25px}h1{font-size:clamp(25px,4vw,34px);letter-spacing:-1px;margin:0 0 8px}h2{font-size:19px;margin:30px 0 15px}h3{font-size:16px;margin:0}.muted{color:var(--muted);line-height:1.55}
+    .button{border:0;background:var(--green);color:#fff;padding:12px 16px;border-radius:10px;font-weight:650}.button:hover{background:#0b6249}.button.secondary{background:#eaf4ed;color:var(--green)}.button.danger{background:#fff0ed;color:#a33125;padding:8px 10px}
+    .nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}.nav button{padding:10px 14px;border:1px solid var(--border);border-radius:9px;background:white;color:var(--muted)}.nav button.active{background:var(--green);border-color:var(--green);color:white}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{background:white;border:1px solid var(--border);border-radius:16px;padding:21px;min-width:0}.label{font-size:13px;color:var(--muted);font-weight:650;margin-bottom:13px}.amount{font-size:clamp(25px,3vw,34px);font-weight:780;letter-spacing:-1px;overflow-wrap:anywhere}.sub{font-size:12px;color:var(--muted);margin-top:9px}.safe{background:var(--green);color:#fff;border-color:var(--green)}.safe .label,.safe .sub{color:#c6e0d2}
+    .columns{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid var(--border)}.row:last-child{border-bottom:0}.item-name{font-size:14px;font-weight:700}.item-detail{font-size:12px;color:var(--muted);margin-top:5px}.item-amount{font-weight:700;white-space:nowrap}.empty{font-size:14px;color:var(--muted);padding:20px 0}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12px;font-weight:650;color:var(--muted)}input{width:100%;min-width:0;padding:11px 12px;border:1px solid #d5e0d8;border-radius:9px;background:white;color:var(--text)}input:focus{outline:2px solid #83c7a3;outline-offset:1px}.form-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.notice{padding:13px;border-radius:10px;background:#eef7f0;color:var(--green);font-size:13px;line-height:1.5;margin-top:15px}.notice.warn{background:var(--warningbg);color:var(--warning)}
+    .panel[hidden],section[hidden]{display:none!important}.table-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.footnote{font-size:12px;color:var(--muted);line-height:1.5;margin-top:16px}footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}
+    @media(max-width:760px){header{padding:12px 16px;min-height:68px}.brand{font-size:22px}main{padding:24px 15px 40px}.welcome{align-items:flex-start;flex-direction:column}.grid,.columns{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.card{padding:18px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">P</div>
+    <div>PayPlan<span class="tagline">Your money. Your plan.</span></div>
+  </div>
+  <span class="demo">DEMO MODE</span>
+</header>
+<main>
+  <div class="welcome">
+    <div><h1 id="page-title">Your financial overview</h1><p class="muted" id="page-description">Know your bills. Plan your paycheck. Spend with confidence.</p></div>
+    <button class="button" id="add-bill-top">+ Add a bill</button>
+  </div>
+  <nav class="nav" aria-label="Main navigation">
+    <button class="active" data-page="dashboard">Dashboard</button>
+    <button data-page="bills">Bills</button>
+    <button data-page="income">Income</button>
+    <button data-page="forecast">Forecast</button>
+  </nav>
+
+  <section id="dashboard">
+    <div class="grid">
+      <div class="card"><div class="label">Current available balance</div><div class="amount" id="balance">$650.00</div><div class="sub">Your starting balance</div></div>
+      <div class="card safe"><div class="label">Estimated safe-to-spend</div><div class="amount" id="safe">$650.00</div><div class="sub" id="safe-detail">After listed bills due before payday</div></div>
+      <div class="card"><div class="label">Next paycheck</div><div class="amount" id="paycheck">$1,500.00</div><div class="sub" id="payday-label">Set your next payday</div></div>
+    </div>
+    <h2>Your money at a glance</h2>
+    <div class="columns">
+      <div class="card"><div class="table-head"><h3>Upcoming bills</h3><button class="button secondary" id="add-bill-inline">Add bill</button></div><div id="bill-list"></div></div>
+      <div class="card">
+        <h3>Set up your plan</h3><p class="muted" style="font-size:13px;margin-top:8px">Enter sample figures to see how your forecast changes.</p>
+        <div class="form-grid">
+          <div class="field"><label for="balance-input">Current balance ($)</label><input id="balance-input" type="number" min="0" step=".01" value="650"></div>
+          <div class="field"><label for="income-input">Next paycheck ($)</label><input id="income-input" type="number" min="0" step=".01" value="1500"></div>
+          <div class="field" style="grid-column:1/-1"><label for="payday-input">Next payday</label><input id="payday-input" type="date"></div>
+          <div class="field" style="grid-column:1/-1"><label for="cushion-input">Minimum cash cushion ($)</label><input id="cushion-input" type="number" min="0" step=".01" value="50"></div>
+        </div>
+        <div class="form-actions"><button class="button" id="update-plan">Update my plan</button><button class="button secondary" id="reset-demo">Reset demo</button></div>
+        <div class="notice" id="message" role="status">Demo figures are examples only. This prototype does not save data.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="other-page" hidden>
+    <div class="card">
+      <h2 id="other-title" style="margin-top:0"></h2><p class="muted" id="other-description"></p>
+      <div id="other-content"></div>
+    </div>
+  </section>
+</main>
+<footer>PayPlan · Your money. Your plan. · Early prototype</footer>
+
+<script>
+(() => {
+  const initialBills = [
+    {id:1,name:"Rent",amount:900,date:"2026-10-15"},
+    {id:2,name:"Car insurance",amount:120,date:"2026-10-18"},
+    {id:3,name:"Phone bill",amount:65,date:"2026-10-20"}
+  ];
+  let nextId = 4;
+  const state = {balance:650,income:1500,payday:"",cushion:50,bills:initialBills.map(x=>({...x}))};
+  const $ = id => document.getElementById(id);
+  const money = n => new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(n);
+  const todayISO = () => { const d=new Date(); d.setHours(0,0,0,0); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; };
+  const prettyDate = s => { const d=new Date(s+"T00:00:00"); return Number.isNaN(d.getTime()) ? s : d.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}); };
+  const safeToSpend = () => {
+    const today=todayISO();
+    const cutoff=state.payday || "";
+    const reserved=state.bills.filter(b=>b.date>=today && (!cutoff || b.date<cutoff)).reduce((sum,b)=>sum+b.amount,0);
+    return state.balance-reserved-state.cushion;
+  };
+  const escapeHTML = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  function renderBills() {
+    const bills=[...state.bills].sort((a,b)=>a.date.localeCompare(b.date));
+    $("bill-list").innerHTML=bills.length ? bills.slice(0,6).map(b=>`<div class="row"><div><div class="item-name">${escapeHTML(b.name)}</div><div class="item-detail">Due ${prettyDate(b.date)}</div></div><div style="text-align:right"><div class="item-amount">${money(b.amount)}</div><button class="button danger" data-delete="${b.id}" aria-label="Delete ${escapeHTML(b.name)}">Remove</button></div></div>`).join("") : '<div class="empty">No bills added yet. Add one to get started.</div>';
+    $("bill-list").querySelectorAll("[data-delete]").forEach(btn=>btn.addEventListener("click",()=>{state.bills=state.bills.filter(b=>b.id!==Number(btn.dataset.delete));render();}));
+  }
+  function render() {
+    $("balance").textContent=money(state.balance);
+    $("safe").textContent=money(safeToSpend());
+    $("safe-detail").textContent=safeToSpend()<0?"Your balance may not cover listed bills and your cushion.":"After listed bills before payday and your cash cushion";
+    $("safe").style.color=safeToSpend()<0?"#ffd2b8":"#ffffff";
+    $("paycheck").textContent=money(state.income);
+    $("payday-label").textContent=state.payday ? "Expected "+prettyDate(state.payday) : "No payday selected";
+    renderBills();
+    renderOther();
+  }
+  function addBill() {
+    const name=prompt("What is the bill called?");
+    if(!name || !name.trim()) return;
+    const raw=prompt("What is the bill amount in dollars?");
+    if(raw===null || raw.trim()==="" || !Number.isFinite(Number(raw)) || Number(raw)<=0){alert("Enter a valid positive bill amount.");return;}
+    const date=prompt("Due date (YYYY-MM-DD):",todayISO());
+    if(!date || !/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(new Date(date+"T00:00:00").getTime())){alert("Enter a valid date in YYYY-MM-DD format.");return;}
+    state.bills.push({id:nextId++,name:name.trim(),amount:Number(raw),date});render();
+  }
+  function updatePlan() {
+    const b=$("balance-input").value, i=$("income-input").value, c=$("cushion-input").value;
+    if(b===""||i===""||c===""||![b,i,c].every(v=>Number.isFinite(Number(v))&&Number(v)>=0)){ $("message").textContent="Enter valid non-negative amounts for balance, paycheck, and cash cushion.";return; }
+    state.balance=Number(b);state.income=Number(i);state.cushion=Number(c);state.payday=$("payday-input").value;render();
+    $("message").textContent="Plan updated in this browser session. Refreshing the page resets the demo.";
+    $("message").className="notice";
+  }
+  function renderOther() {
+    const active=document.querySelector("[data-page].active")?.dataset.page || "dashboard";
+    if(active==="dashboard") return;
+    const info={
+      bills:["Bills","Manage the bills included in your current estimate.",`<div class="notice">Your listed bills are managed on the dashboard. Use “Add bill” to add a bill or “Remove” to delete one.</div>`],
+      income:["Income","Plan around your next expected paycheck.",`<div class="notice">Current planned paycheck: <strong>${money(state.income)}</strong>${state.payday?" on "+prettyDate(state.payday):""}. Edit the amount and date on the dashboard.</div>`],
+      forecast:["Cash-flow forecast","A simplified estimate using current balance, listed bills, and your minimum cash cushion.",`<div class="grid" style="margin-top:20px"><div class="card"><div class="label">Current balance</div><div class="amount">${money(state.balance)}</div></div><div class="card"><div class="label">Bills reserved</div><div class="amount">${money(state.bills.filter(b=>b.date>=todayISO()&&(!state.payday||b.date<state.payday)).reduce((s,b)=>s+b.amount,0))}</div></div><div class="card safe"><div class="label">Estimated available</div><div class="amount">${money(safeToSpend())}</div></div></div><p class="footnote">This estimate does not yet account for all everyday spending, pending transactions, or uncertain income. Do not treat it as a guarantee of available funds.</p>`]
+    };
+    const x=info[active];$("other-title").textContent=x[0];$("other-description").textContent=x[1];$("other-content").innerHTML=x[2];
+  }
+  const pages={
+    dashboard:["Your financial overview","Know your bills. Plan your paycheck. Spend with confidence."],
+    bills:["Bills","Manage the expenses you need to plan for."],
+    income:["Income","Plan around your upcoming paychecks."],
+    forecast:["Cash-flow forecast","Understand how upcoming expenses affect your available balance."]
+  };
+  document.querySelectorAll("[data-page]").forEach(btn=>btn.addEventListener("click",()=>{
+    document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b===btn));
+    const p=btn.dataset.page;$("page-title").textContent=pages[p][0];$("page-description").textContent=pages[p][1];
+    $("dashboard").hidden=p!=="dashboard";$("other-page").hidden=p==="dashboard";renderOther();
+  }));
+  $("add-bill-top").addEventListener("click",addBill);$("add-bill-inline").addEventListener("click",addBill);$("update-plan").addEventListener("click",updatePlan);
+  $("reset-demo").addEventListener("click",()=>{
+    state.balance=650;state.income=1500;state.payday="";state.cushion=50;state.bills=initialBills.map(x=>({...x}));
+    $("balance-input").value=650;$("income-input").value=1500;$("payday-input").value="";$("cushion-input").value=50;
+    $("message").textContent="Demo reset. These are example figures only.";$("message").className="notice";render();
+  });
+  $("payday-input").min=todayISO();
+  render();
+})();
+</script>
+</body>
+</html>
