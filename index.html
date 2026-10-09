@@ -1,143 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#064e3b">
-<meta name="description" content="PayPlan helps you plan paychecks, manage bills, and estimate what you can safely spend.">
+<meta name="description" content="PayPlan helps you plan paychecks, manage bills, track spending, and forecast your cash flow.">
 <title>PayPlan — Your money. Your plan.</title>
 <style>
-:root{--green:#064e3b;--accent:#16a36a;--bg:#f5f8f6;--text:#17251e;--muted:#718078;--border:#e2eae4;--white:#fff;--danger:#a33125;--dangerbg:#fff0ed;--warning:#8a4b0f;--warningbg:#fff6e8}
+:root{--green:#064e3b;--accent:#16a36a;--bg:#f5f8f6;--text:#17251e;--muted:#718078;--border:#e2eae4;--white:#fff;--red:#a33125;--redbg:#fff0ed;--amber:#80520c;--amberbg:#fff6e8}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}button,input,select{font:inherit}button{cursor:pointer}
-header{min-height:78px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px max(18px,calc((100% - 1160px)/2))}
-.brand{display:flex;align-items:center;gap:12px;color:var(--green);font-size:25px;font-weight:800;letter-spacing:-1px}.brand img{width:190px;max-width:42vw;height:auto;display:block}.brand .fallback{display:none}.tagline{display:block;font-size:10px;font-weight:500;letter-spacing:.1px;color:var(--muted)}.demo{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--green);background:#e8f5ed;padding:8px 11px;border-radius:30px}
-main{max-width:1160px;margin:auto;padding:34px 22px 56px}.welcome{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:25px}h1{font-size:clamp(25px,4vw,34px);letter-spacing:-1px;margin:0 0 8px}h2{font-size:19px;margin:30px 0 15px}h3{font-size:16px;margin:0}.muted{color:var(--muted);line-height:1.55}
-.button{border:0;background:var(--green);color:#fff;padding:11px 15px;border-radius:10px;font-weight:650}.button:hover{background:#0b6249}.button.secondary{background:#eaf4ed;color:var(--green)}.button.danger{background:var(--dangerbg);color:var(--danger);padding:7px 9px;font-size:12px}
+header{min-height:78px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px max(18px,calc((100% - 1180px)/2))}
+.brand{display:flex;align-items:center;gap:12px;color:var(--green);font-size:25px;font-weight:800;letter-spacing:-1px}.brand img{width:190px;max-width:44vw;height:auto;display:block}.fallback{display:none}.tagline{display:block;font-size:10px;font-weight:500;letter-spacing:.1px;color:var(--muted)}.version{font-size:11px;font-weight:700;letter-spacing:.4px;color:var(--green);background:#e8f5ed;padding:8px 11px;border-radius:30px}
+main{max-width:1180px;margin:auto;padding:32px 22px 55px}.welcome{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:23px}h1{font-size:clamp(25px,4vw,34px);letter-spacing:-1px;margin:0 0 8px}h2{font-size:19px;margin:29px 0 14px}h3{font-size:16px;margin:0}.muted{color:var(--muted);line-height:1.55}.button{border:0;background:var(--green);color:white;padding:11px 15px;border-radius:10px;font-weight:650}.button:hover{background:#0b6249}.button.secondary{background:#eaf4ed;color:var(--green)}.button.danger{background:var(--redbg);color:var(--red);padding:7px 9px;font-size:12px}
 .nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}.nav button{padding:10px 14px;border:1px solid var(--border);border-radius:9px;background:white;color:var(--muted)}.nav button.active{background:var(--green);border-color:var(--green);color:white}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{background:white;border:1px solid var(--border);border-radius:16px;padding:21px;min-width:0}.label{font-size:13px;color:var(--muted);font-weight:650;margin-bottom:13px}.amount{font-size:clamp(25px,3vw,34px);font-weight:780;letter-spacing:-1px;overflow-wrap:anywhere}.sub{font-size:12px;color:var(--muted);margin-top:9px}.safe{background:var(--green);color:#fff;border-color:var(--green)}.safe .label,.safe .sub{color:#c6e0d2}
-.columns{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--border)}.row:last-child{border-bottom:0}.item-name{font-size:14px;font-weight:700}.item-detail{font-size:12px;color:var(--muted);margin-top:5px}.item-amount{font-weight:700;white-space:nowrap}.empty{font-size:14px;color:var(--muted);padding:20px 0}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12px;font-weight:650;color:var(--muted)}input,select{width:100%;min-width:0;padding:11px 12px;border:1px solid #d5e0d8;border-radius:9px;background:white;color:var(--text)}input:focus,select:focus{outline:2px solid #83c7a3;outline-offset:1px}.form-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.notice{padding:13px;border-radius:10px;background:#eef7f0;color:var(--green);font-size:13px;line-height:1.5;margin-top:15px}.notice.warn{background:var(--warningbg);color:var(--warning)}
-.panel[hidden],section[hidden]{display:none!important}.table-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.footnote{font-size:12px;color:var(--muted);line-height:1.5;margin-top:16px}.bill-form{border-top:1px solid var(--border);margin-top:18px;padding-top:18px}.bill-form h3{margin-bottom:4px}.recurring-label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);margin-top:12px}.recurring-label input{width:auto}.tag{display:inline-block;background:#edf7f0;color:var(--green);font-size:11px;padding:4px 7px;border-radius:20px;margin-top:5px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.card{background:white;border:1px solid var(--border);border-radius:16px;padding:20px;min-width:0}.label{font-size:13px;color:var(--muted);font-weight:650;margin-bottom:12px}.amount{font-size:clamp(25px,3vw,33px);font-weight:780;letter-spacing:-1px;overflow-wrap:anywhere}.sub{font-size:12px;color:var(--muted);margin-top:9px}.safe{background:var(--green);color:white;border-color:var(--green)}.safe .label,.safe .sub{color:#c6e0d2}
+.columns{display:grid;grid-template-columns:1.2fr 1fr;gap:15px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--border)}.row:last-child{border-bottom:0}.item-name{font-size:14px;font-weight:700}.item-detail{font-size:12px;color:var(--muted);margin-top:5px}.item-amount{font-weight:700;white-space:nowrap}.empty{font-size:14px;color:var(--muted);padding:20px 0}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12px;font-weight:650;color:var(--muted)}input,select{width:100%;min-width:0;padding:11px 12px;border:1px solid #d5e0d8;border-radius:9px;background:white;color:var(--text)}input:focus,select:focus{outline:2px solid #83c7a3;outline-offset:1px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.notice{padding:13px;border-radius:10px;background:#eef7f0;color:var(--green);font-size:13px;line-height:1.5;margin-top:14px}.notice.warn{background:var(--amberbg);color:var(--amber)}.notice.error{background:var(--redbg);color:var(--red)}
+section[hidden]{display:none!important}.table-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.tag{display:inline-block;background:#edf7f0;color:var(--green);font-size:11px;padding:4px 7px;border-radius:20px;margin-top:5px}.footnote{font-size:12px;color:var(--muted);line-height:1.5;margin-top:16px}.pill{font-size:12px;border-radius:30px;padding:5px 8px;background:#edf7f0;color:var(--green)}.bar{height:8px;background:#e8eee9;border-radius:99px;overflow:hidden;margin-top:12px}.bar>div{height:100%;background:var(--accent);width:0%}.activity-list{margin-top:10px}.activity{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px}.activity:last-child{border-bottom:0}
 footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}
-@media(max-width:760px){header{padding:12px 15px;min-height:68px}.brand img{width:160px}.demo{font-size:10px}main{padding:24px 15px 40px}.welcome{align-items:flex-start;flex-direction:column}.grid,.columns{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.card{padding:18px}.item-amount{font-size:14px}}
+@media(max-width:760px){header{padding:12px 15px;min-height:68px}.brand img{width:158px}.version{font-size:10px}main{padding:23px 15px 40px}.welcome{align-items:flex-start;flex-direction:column}.grid,.columns{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.card{padding:17px}.item-amount{font-size:14px}}
 </style>
 </head>
 <body>
-<header>
-  <div class="brand">
-    <img src="payplan-logo.png" alt="PayPlan — Your money. Your plan." onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-    <div class="fallback"><strong>PayPlan</strong><span class="tagline">Your money. Your plan.</span></div>
-  </div>
-  <span class="demo">V2 PROTOTYPE</span>
-</header>
+<header><div class="brand"><img src="payplan-logo.png" alt="PayPlan — Your money. Your plan." onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="fallback"><strong>PayPlan</strong><span class="tagline">Your money. Your plan.</span></div></div><span class="version">V3 · CASH FLOW</span></header>
 <main>
-  <div class="welcome"><div><h1 id="page-title">Your financial overview</h1><p class="muted" id="page-description">Know your bills. Plan your paycheck. Spend with confidence.</p></div><button class="button" id="show-bill-form">+ Add a bill</button></div>
-  <nav class="nav" aria-label="Main navigation">
-    <button class="active" data-page="dashboard">Dashboard</button><button data-page="bills">Bills</button><button data-page="income">Income</button><button data-page="forecast">Forecast</button>
-  </nav>
-  <section id="dashboard">
-    <div class="grid">
-      <div class="card"><div class="label">Current available balance</div><div class="amount" id="balance">$0.00</div><div class="sub">Your starting balance</div></div>
-      <div class="card safe"><div class="label">Estimated safe-to-spend</div><div class="amount" id="safe">$0.00</div><div class="sub" id="safe-detail">After listed bills and cash cushion</div></div>
-      <div class="card"><div class="label">Next paycheck</div><div class="amount" id="paycheck">$0.00</div><div class="sub" id="payday-label">Set your next payday</div></div>
-    </div>
-    <h2>Your money at a glance</h2>
-    <div class="columns">
-      <div class="card"><div class="table-head"><h3>Upcoming bills</h3><button class="button secondary" id="add-bill-inline">Add bill</button></div><div id="bill-list"></div></div>
-      <div class="card">
-        <h3>Plan your money</h3><p class="muted" style="font-size:13px;margin-top:8px">Your information is saved in this browser on this device. Do not use shared devices for private financial data.</p>
-        <div class="form-grid">
-          <div class="field"><label for="balance-input">Current balance ($)</label><input id="balance-input" type="number" min="0" step=".01"></div>
-          <div class="field"><label for="income-input">Next paycheck ($)</label><input id="income-input" type="number" min="0" step=".01"></div>
-          <div class="field" style="grid-column:1/-1"><label for="payday-input">Next payday</label><input id="payday-input" type="date"></div>
-          <div class="field" style="grid-column:1/-1"><label for="cushion-input">Minimum cash cushion ($)</label><input id="cushion-input" type="number" min="0" step=".01"></div>
-        </div>
-        <div class="form-actions"><button class="button" id="update-plan">Update my plan</button><button class="button secondary" id="reset-demo">Reset demo</button></div>
-        <div class="notice" id="message" role="status">Your entries are stored locally in this browser. This is a prototype, not a bank-connected app.</div>
-      </div>
-    </div>
-  </section>
-  <section id="other-page" hidden><div class="card"><h2 id="other-title" style="margin-top:0"></h2><p class="muted" id="other-description"></p><div id="other-content"></div></div></section>
-</main>
-<footer>PayPlan · Your money. Your plan. · V2 prototype</footer>
+<div class="welcome"><div><h1 id="page-title">Your financial overview</h1><p class="muted" id="page-description">Know your bills. Plan your paycheck. Spend with confidence.</p></div><button class="button" id="add-item">+ Add item</button></div>
+<nav class="nav" aria-label="Main navigation"><button class="active" data-page="dashboard">Dashboard</button><button data-page="bills">Bills</button><button data-page="income">Income</button><button data-page="spending">Spending</button><button data-page="forecast">Forecast</button></nav>
+<section id="dashboard">
+<div class="grid">
+<div class="card"><div class="label">Current available balance</div><div class="amount" id="balance">$0.00</div><div class="sub">Balance you entered</div></div>
+<div class="card safe"><div class="label">Estimated safe-to-spend</div><div class="amount" id="safe">$0.00</div><div class="sub" id="safe-detail">Bills reserved through next payday</div></div>
+<div class="card"><div class="label">Next paycheck</div><div class="amount" id="paycheck">$0.00</div><div class="sub" id="payday-label">Set your next payday</div></div>
+</div>
+<h2>Cash flow at a glance</h2>
+<div class="columns">
+<div class="card"><div class="table-head"><h3>Upcoming activity</h3><span class="pill" id="activity-count">0 items</span></div><div id="activity-list" class="activity-list"></div></div>
+<div class="card"><h3>Plan your money</h3><p class="muted" style="font-size:13px;margin-top:8px">Saved in this browser on this device. No bank connection or cloud account yet.</p>
+<div class="form-grid">
+<div class="field"><label for="balance-input">Current balance ($)</label><input id="balance-input" type="number" min="0" step=".01"></div>
+<div class="field"><label for="income-input">Next paycheck ($)</label><input id="income-input" type="number" min="0" step=".01"></div>
+<div class="field"><label for="payday-input">Next payday</label><input id="payday-input" type="date"></div>
+<div class="field"><label for="cushion-input">Minimum cash cushion ($)</label><input id="cushion-input" type="number" min="0" step=".01"></div>
+</div><div class="actions"><button class="button" id="update-plan">Update plan</button><button class="button secondary" id="reset">Reset demo</button></div><div class="notice" id="message" role="status">Use sample figures only while testing.</div></div>
+</div>
+<h2>Spending snapshot</h2><div class="card"><div class="table-head"><div><h3>Logged spending this month</h3><p class="muted" style="font-size:12px;margin-top:5px">Expenses you add manually</p></div><strong id="month-spend">$0.00</strong></div><div class="bar"><div id="spend-bar"></div></div><p class="footnote" id="spend-note">Add expenses to begin tracking your spending.</p></div>
+</section>
+<section id="other-page" hidden><div class="card"><div class="table-head"><h2 id="other-title" style="margin:0"></h2><button class="button" id="add-page-item">+ Add</button></div><p class="muted" id="other-description" style="margin-top:9px"></p><div id="other-content"></div></div></section>
+</main><footer>PayPlan · Your money. Your plan. · V3 prototype</footer>
 <script>
-(() => {
-  const KEY="payplan-v2-local";
-  const defaults={balance:650,income:1500,payday:"",cushion:50,bills:[
-    {id:1,name:"Rent",amount:900,date:"2026-10-15",frequency:"monthly"},
-    {id:2,name:"Car insurance",amount:120,date:"2026-10-18",frequency:"monthly"},
-    {id:3,name:"Phone bill",amount:65,date:"2026-10-20",frequency:"monthly"}
-  ]};
-  const $=id=>document.getElementById(id);
-  const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(n);
-  const todayISO=()=>{const d=new Date();d.setHours(0,0,0,0);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`};
-  const prettyDate=s=>{const d=new Date(s+"T00:00:00");return Number.isNaN(d.getTime())?s:d.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})};
-  const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  let state=loadState();
-  let nextId=Math.max(0,...state.bills.map(b=>Number(b.id)||0))+1;
-  function loadState(){try{const saved=localStorage.getItem(KEY);if(saved){const parsed=JSON.parse(saved);if(parsed&&Array.isArray(parsed.bills))return {...defaults,...parsed};}}catch(e){}return structuredClone(defaults)}
-  function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));$("message").textContent="Saved in this browser on this device. No account or cloud backup is configured.";return true}catch(e){$("message").textContent="Could not save in this browser. Check browser storage settings.";return false}}
-  function dueDatesBetween(start,end,bill){
-    const dates=[]; let d=new Date(bill.date+"T00:00:00");const endDate=new Date(end+"T00:00:00");
-    if(Number.isNaN(d.getTime()))return dates;
-    if(bill.frequency==="once"){if(bill.date>=start&&bill.date<end)dates.push(bill.date);return dates}
-    let safety=0;
-    while(d<endDate&&safety++<240){
-      const iso=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-      if(iso>=start)dates.push(iso);
-      if(bill.frequency==="weekly")d.setDate(d.getDate()+7);
-      else if(bill.frequency==="biweekly")d.setDate(d.getDate()+14);
-      else if(bill.frequency==="yearly")d.setFullYear(d.getFullYear()+1);
-      else {const day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+1);const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();d.setDate(Math.min(day,last));}
-    }
-    return dates;
-  }
-  function upcomingBillOccurrences(){
-    const start=todayISO();const end=state.payday||"9999-12-31";const rows=[];
-    state.bills.forEach(b=>dueDatesBetween(start,end,b).forEach(date=>rows.push({name:b.name,amount:Number(b.amount)||0,date,frequency:b.frequency,id:b.id})));
-    return rows.sort((a,b)=>a.date.localeCompare(b.date));
-  }
-  function safeToSpend(){const reserved=upcomingBillOccurrences().reduce((s,b)=>s+b.amount,0);return state.balance-reserved-state.cushion}
-  function renderBills(){
-    const bills=[...state.bills].sort((a,b)=>a.date.localeCompare(b.date));
-    $("bill-list").innerHTML=bills.length?bills.map(b=>`<div class="row"><div><div class="item-name">${esc(b.name)}</div><div class="item-detail">Next due ${prettyDate(b.date)}</div><span class="tag">${({once:"One-time",weekly:"Weekly",biweekly:"Every 2 weeks",monthly:"Monthly",yearly:"Yearly"})[b.frequency]||"Monthly"}</span></div><div style="text-align:right"><div class="item-amount">${money(Number(b.amount)||0)}</div><button class="button danger" data-delete="${Number(b.id)}">Remove</button></div></div>`).join(""):'<div class="empty">No bills yet. Add your first bill.</div>';
-    $("bill-list").querySelectorAll("[data-delete]").forEach(btn=>btn.addEventListener("click",()=>{state.bills=state.bills.filter(b=>Number(b.id)!==Number(btn.dataset.delete));persist();render()}));
-  }
-  function render(){
-    $("balance").textContent=money(state.balance);$("safe").textContent=money(safeToSpend());$("safe").style.color=safeToSpend()<0?"#ffd2b8":"#fff";
-    $("safe-detail").textContent=safeToSpend()<0?"Warning: bills and your cushion exceed your balance":"After bills due before payday and your cash cushion";
-    $("paycheck").textContent=money(state.income);$("payday-label").textContent=state.payday?"Expected "+prettyDate(state.payday):"No payday selected";
-    $("balance-input").value=state.balance;$("income-input").value=state.income;$("payday-input").value=state.payday;$("cushion-input").value=state.cushion;
-    renderBills();renderOther();
-  }
-  function addBill(){
-    const name=prompt("Bill name (for example, rent):");if(!name||!name.trim())return;
-    const raw=prompt("Bill amount in dollars:");if(raw===null||raw.trim()===""||!Number.isFinite(Number(raw))||Number(raw)<=0){alert("Enter a valid positive amount.");return}
-    const date=prompt("Next due date (YYYY-MM-DD):",todayISO());if(!date||!/^\d{4}-\d{2}-\d{2}$/.test(date)||Number.isNaN(new Date(date+"T00:00:00").getTime())){alert("Enter a valid date as YYYY-MM-DD.");return}
-    const choices="Choose frequency by entering one of: once, weekly, biweekly, monthly, yearly";
-    let frequency=(prompt(choices,"monthly")||"monthly").toLowerCase().trim();
-    if(!["once","weekly","biweekly","monthly","yearly"].includes(frequency)){alert("Unknown frequency. Bill was not added.");return}
-    state.bills.push({id:nextId++,name:name.trim(),amount:Number(raw),date,frequency});persist();render();
-  }
-  function updatePlan(){
-    const vals=[$("balance-input").value,$("income-input").value,$("cushion-input").value];
-    if(vals.some(v=>v.trim()===""||!Number.isFinite(Number(v))||Number(v)<0)){$("message").textContent="Enter valid non-negative amounts for balance, paycheck, and cash cushion.";return}
-    state.balance=Number(vals[0]);state.income=Number(vals[1]);state.cushion=Number(vals[2]);state.payday=$("payday-input").value;
-    persist();render();$("message").textContent="Plan updated and saved in this browser.";
-  }
-  function renderOther(){
-    const page=document.querySelector("[data-page].active")?.dataset.page||"dashboard";if(page==="dashboard")return;
-    const data={
-      bills:["Bills","Recurring bill schedules are included in the forecast.",`<div class="notice">Use “Add a bill” to create one-time, weekly, every-two-weeks, monthly, or yearly bills. Your entries are stored locally in this browser.</div>`],
-      income:["Income","Your next planned paycheck.",`<div class="notice">Planned paycheck: <strong>${money(state.income)}</strong>${state.payday?" on "+prettyDate(state.payday):""}. Edit these values on the dashboard.</div>`],
-      forecast:["Cash-flow forecast","Estimated available money after listed bills due before your next payday and your cash cushion.",`<div class="grid" style="margin-top:18px"><div class="card"><div class="label">Current balance</div><div class="amount">${money(state.balance)}</div></div><div class="card"><div class="label">Bills reserved</div><div class="amount">${money(upcomingBillOccurrences().reduce((s,b)=>s+b.amount,0))}</div></div><div class="card safe"><div class="label">Estimated safe-to-spend</div><div class="amount">${money(safeToSpend())}</div></div></div><p class="footnote">This simplified estimate does not include everyday spending, pending transactions, or uncertain income. It is not a guarantee of available funds.</p>`]
-    };const d=data[page];$("other-title").textContent=d[0];$("other-description").textContent=d[1];$("other-content").innerHTML=d[2];
-  }
-  const pages={dashboard:["Your financial overview","Know your bills. Plan your paycheck. Spend with confidence."],bills:["Bills","Manage the expenses you need to plan for."],income:["Income","Plan around your upcoming paychecks."],forecast:["Cash-flow forecast","Understand how upcoming expenses affect your available balance."]};
-  document.querySelectorAll("[data-page]").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b===btn));const p=btn.dataset.page;$("page-title").textContent=pages[p][0];$("page-description").textContent=pages[p][1];$("dashboard").hidden=p!=="dashboard";$("other-page").hidden=p==="dashboard";renderOther()}));
-  $("show-bill-form").addEventListener("click",addBill);$("add-bill-inline").addEventListener("click",addBill);$("update-plan").addEventListener("click",updatePlan);
-  $("reset-demo").addEventListener("click",()=>{if(!confirm("Reset all PayPlan demo data in this browser?"))return;state=structuredClone(defaults);nextId=4;persist();$("message").textContent="Demo data reset.";render()});
-  render();
+(()=> {
+const KEY="payplan-v3-data";
+const defaults={balance:650,income:1500,payday:"",cushion:50,bills:[],incomeItems:[],expenses:[]};
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(n);
+const today=()=>{const d=new Date();d.setHours(0,0,0,0);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`};
+const isoDate=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const dateText=s=>{const d=new Date(s+"T00:00:00");return Number.isNaN(d.getTime())?s:d.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let state=load();let nextId=Math.max(0,...[...state.bills,...state.incomeItems,...state.expenses].map(x=>Number(x.id)||0))+1;
+function load(){try{const v=JSON.parse(localStorage.getItem(KEY));if(v&&Array.isArray(v.bills)&&Array.isArray(v.incomeItems)&&Array.isArray(v.expenses))return {...defaults,...v}}catch(e){}return JSON.parse(JSON.stringify(defaults))}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));$("message").textContent="Saved in this browser on this device.";return true}catch(e){$("message").textContent="Unable to save. Check browser storage settings.";return false}}
+function addMonths(date,count){const d=new Date(date+"T00:00:00"),day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+count);d.setDate(Math.min(day,new Date(d.getFullYear(),d.getMonth()+1,0).getDate()));return isoDate(d)}
+function occurrences(item,start,end){const result=[];let d=item.date;let loops=0;while(d<end&&loops++<240){if(d>=start)result.push({...item,occurrenceDate:d});if(item.frequency==="once")break;if(item.frequency==="weekly"){const x=new Date(d+"T00:00:00");x.setDate(x.getDate()+7);d=isoDate(x)}else if(item.frequency==="biweekly"){const x=new Date(d+"T00:00:00");x.setDate(x.getDate()+14);d=isoDate(x)}else if(item.frequency==="yearly"){const x=new Date(d+"T00:00:00");x.setFullYear(x.getFullYear()+1);d=isoDate(x)}else d=addMonths(d,1)}return result}
+function horizon(){return state.payday&&state.payday>today()?state.payday:addDays(today(),30)}
+function addDays(s,n){const d=new Date(s+"T00:00:00");d.setDate(d.getDate()+n);return isoDate(d)}
+function billOccurrences(){const start=today(),end=horizon();return state.bills.flatMap(b=>occurrences(b,start,end)).filter(b=>b.occurrenceDate<(state.payday||end))}
+function incomeOccurrences(){const start=today(),end=horizon();return state.incomeItems.flatMap(i=>occurrences(i,start,end))}
+function reserved(){return billOccurrences().reduce((s,b)=>s+Number(b.amount||0),0)}
+function safeSpend(){return state.balance-reserved()-state.cushion}
+function render(){
+$("balance").textContent=money(state.balance);$("safe").textContent=money(safeSpend());$("safe").style.color=safeSpend()<0?"#ffd2b8":"#fff";
+$("safe-detail").textContent=safeSpend()<0?"Warning: listed bills and cushion exceed your balance":"After listed bills and cash cushion";
+$("paycheck").textContent=money(state.income);$("payday-label").textContent=state.payday?"Expected "+dateText(state.payday):"No payday selected · using 30-day view";
+$("balance-input").value=state.balance;$("income-input").value=state.income;$("payday-input").value=state.payday;$("cushion-input").value=state.cushion;
+const all=[...billOccurrences().map(x=>({...x,type:"Bill",date:x.occurrenceDate,sign:-1})),...incomeOccurrences().map(x=>({...x,type:"Income",date:x.occurrenceDate,sign:1})),...state.expenses.filter(x=>x.date>=today()).map(x=>({...x,type:"Expense",sign:-1}))].sort((a,b)=>a.date.localeCompare(b.date)).slice(0,8);
+$("activity-count").textContent=all.length+" items";
+$("activity-list").innerHTML=all.length?all.map(x=>`<div class="activity"><div><strong>${esc(x.name)}</strong><div class="item-detail">${x.type} · ${dateText(x.date)}</div></div><strong style="color:${x.sign<0?"#a33125":"#087443"}">${x.sign<0?"−":"+"}${money(x.amount)}</strong></div>`).join(""):'<div class="empty">Add bills, income, or expenses to see upcoming activity.</div>';
+const now=new Date(),month=now.getMonth(),year=now.getFullYear();const spend=state.expenses.filter(x=>{const d=new Date(x.date+"T00:00:00");return d.getMonth()===month&&d.getFullYear()===year}).reduce((s,x)=>s+Number(x.amount||0),0);
+$("month-spend").textContent=money(spend);$("spend-bar").style.width=Math.min(100,spend/Math.max(state.income,1)*100)+"%";$("spend-note").textContent=spend?"Logged spending is "+Math.round(spend/Math.max(state.income,1)*100)+"% of the next paycheck amount.":"Add expenses in Spending to begin tracking.";
+renderOther();
+}
+function addItem(){
+const page=document.querySelector("[data-page].active")?.dataset.page||"dashboard";
+if(page==="income"){addRecord("income");return}if(page==="spending"){addRecord("expense");return}addBill()
+}
+function addBill(){
+const name=prompt("Bill name:");if(!name||!name.trim())return;
+const amount=prompt("Amount in dollars:");if(amount===null||amount.trim()===""||!Number.isFinite(Number(amount))||Number(amount)<=0){alert("Enter a positive amount.");return}
+const date=prompt("Next due date (YYYY-MM-DD):",today());if(!validDate(date)){alert("Enter a valid calendar date in YYYY-MM-DD format.");return}
+const frequency=(prompt("Frequency: once, weekly, biweekly, monthly, yearly","monthly")||"monthly").trim().toLowerCase();if(!["once","weekly","biweekly","monthly","yearly"].includes(frequency)){alert("Unknown frequency.");return}
+state.bills.push({id:nextId++,name:name.trim(),amount:Number(amount),date,frequency});save();render()
+}
+function addRecord(type){
+const isIncome=type==="income";const name=prompt(isIncome?"Income source name:":"Expense description:");if(!name||!name.trim())return;
+const raw=prompt("Amount in dollars:");if(raw===null||raw.trim()===""||!Number.isFinite(Number(raw))||Number(raw)<=0){alert("Enter a positive amount.");return}
+const date=prompt("Date (YYYY-MM-DD):",today());if(!validDate(date)){alert("Enter a valid calendar date.");return}
+const frequency=isIncome?(prompt("Frequency: once, weekly, biweekly, monthly, yearly","biweekly")||"once").toLowerCase().trim():"once";
+if(isIncome&&!["once","weekly","biweekly","monthly","yearly"].includes(frequency)){alert("Unknown frequency.");return}
+(isIncome?state.incomeItems:state.expenses).push({id:nextId++,name:name.trim(),amount:Number(raw),date,frequency});save();render()
+}
+function validDate(s){if(!s||!/^\d{4}-\d{2}-\d{2}$/.test(s))return false;const d=new Date(s+"T00:00:00");return !Number.isNaN(d.getTime())&&isoDate(d)===s}
+function updatePlan(){const b=$("balance-input").value,i=$("income-input").value,c=$("cushion-input").value;if([b,i,c].some(v=>v.trim()===""||!Number.isFinite(Number(v))||Number(v)<0)){$("message").textContent="Enter valid non-negative amounts.";return}
+const p=$("payday-input").value;if(p&&!validDate(p)){$("message").textContent="Enter a valid payday.";return}
+state.balance=Number(b);state.income=Number(i);state.cushion=Number(c);state.payday=p;save();render()}
+const pageNames={dashboard:["Your financial overview","Know your bills. Plan your paycheck. Spend with confidence."],bills:["Bills","Manage one-time and recurring expenses."],income:["Income","Add expected paychecks and other incoming money."],spending:["Spending","Log purchases to understand where your money goes."],forecast:["Cash-flow forecast","Review scheduled money in and money out."]};
+function renderOther(){const p=document.querySelector("[data-page].active")?.dataset.page||"dashboard";if(p==="dashboard")return;
+let rows=[],description="";
+if(p==="bills"){description="Recurring bills are included in the estimate through the next payday, or the next 30 days if no payday is set.";rows=state.bills.map(x=>({...x,kind:"Bill",remove:"bill"}))}
+if(p==="income"){description="Add expected income. These entries appear in upcoming activity; the main paycheck card is the amount entered on the dashboard.";rows=state.incomeItems.map(x=>({...x,kind:"Income",remove:"income"}))}
+if(p==="spending"){description="Manually logged expenses are saved locally and included in this month's spending snapshot.";rows=state.expenses.map(x=>({...x,kind:"Expense",remove:"expense"}))}
+if(p==="forecast"){description="The forecast is a simple scheduled estimate. It does not include pending bank transactions or automatic bank data.";rows=[...billOccurrences().map(x=>({...x,kind:"Bill",date:x.occurrenceDate,sign:-1})),...incomeOccurrences().map(x=>({...x,kind:"Income",date:x.occurrenceDate,sign:1})),...state.expenses.filter(x=>x.date>=today()).map(x=>({...x,kind:"Expense",sign:-1}))].sort((a,b)=>a.date.localeCompare(b.date))}
+$("other-description").textContent=description;
+$("other-content").innerHTML=rows.length?rows.map(x=>`<div class="row"><div><div class="item-name">${esc(x.name)}</div><div class="item-detail">${x.kind} · ${dateText(x.date)}${x.frequency?" · "+x.frequency:""}</div></div><div style="text-align:right"><div class="item-amount">${x.sign===1?"+":""}${money(x.amount)}</div>${x.remove?`<button class="button danger" data-remove="${x.remove}" data-id="${x.id}">Remove</button>`:""}</div></div>`).join(""):'<div class="empty">Nothing here yet. Use Add to create your first item.</div>';
+$("other-content").querySelectorAll("[data-remove]").forEach(btn=>btn.addEventListener("click",()=>{const key={bill:"bills",income:"incomeItems",expense:"expenses"}[btn.dataset.remove];state[key]=state[key].filter(x=>Number(x.id)!==Number(btn.dataset.id));save();render()}));
+}
+document.querySelectorAll("[data-page]").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b===btn));const p=btn.dataset.page;$("page-title").textContent=pageNames[p][0];$("page-description").textContent=pageNames[p][1];$("dashboard").hidden=p!=="dashboard";$("other-page").hidden=p==="dashboard";$("add-item").textContent=p==="dashboard"||p==="bills"?"+ Add bill":p==="income"?"+ Add income":p==="spending"?"+ Add expense":"+ Add item";renderOther()}));
+$("add-item").addEventListener("click",addItem);$("add-page-item").addEventListener("click",addItem);$("update-plan").addEventListener("click",updatePlan);
+$("reset").addEventListener("click",()=>{if(!confirm("Clear all PayPlan prototype data from this browser?"))return;state=JSON.parse(JSON.stringify(defaults));nextId=1;try{localStorage.removeItem(KEY)}catch(e){}render();$("message").textContent="Prototype data reset."});
+render();
 })();
 </script>
 </body>

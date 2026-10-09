@@ -1,20 +1,16 @@
-# PayPlan V2 prototype
+# PayPlan V3 — Cash-flow tools
 
-## Files
-- `index.html` — responsive PayPlan dashboard, recurring bill schedules, and local browser persistence.
-- `payplan-logo.png` — approved logo image used in the header.
+Upload `index.html` and `payplan-logo.png` to the root of the GitHub Pages repository.
 
-## Update the live GitHub Pages site
-1. Open the `payplan.github.io` repository in the PayPlan organization.
-2. Upload/replace `index.html` and add `payplan-logo.png` at the repository root.
-3. Commit changes to the branch configured for GitHub Pages.
-4. Wait for deployment, then reload the site. A hard refresh may be needed.
+## New in V3
+- Added a Spending section for manual expense logging.
+- Added an Income section for expected income items with recurrence.
+- Added a scheduled activity view and 30-day fallback forecast when no payday is entered.
+- Improved date validation and monthly recurrence handling.
+- Continues saving prototype data in the current browser using localStorage.
 
-## V2 improvements
-- Uses the approved P-and-upward-arrow logo image with tagline.
-- Supports one-time, weekly, every-two-weeks, monthly, and yearly bill schedules.
-- Saves the current prototype's plan and bills in local browser storage.
-- Updates the simplified safe-to-spend estimate using bills due before the next payday and a cash cushion.
+## Deployment
+In the `payplan.github.io` repository, upload/replace `index.html` and ensure `payplan-logo.png` is present at the same root level. Commit to the Pages branch, wait for deployment, then refresh the live site.
 
 ## Important limitations
-This is still a prototype. Browser storage is local to one browser/device and is not encrypted account storage or cloud sync. Do not use shared devices for sensitive financial information. It is not bank-connected, and estimates do not include every transaction or expense. Validate all calculations before using this with real financial decisions.
+This is a prototype, not a bank-connected financial service. Data is stored only in the browser/device and is not synced or protected by an account system. The forecast is simplified and may not reflect pending transactions or all real-world spending. Do not rely on it as a guarantee of available funds.
