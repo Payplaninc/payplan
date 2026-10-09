@@ -1,24 +1,20 @@
-# PayPlan — Your money. Your plan.
-
-This is the first static prototype for the PayPlan GitHub Pages website.
+# PayPlan V2 prototype
 
 ## Files
-- `index.html` — responsive dashboard prototype with sample data.
-- `payplan-logo.png` — approved logo reference image, if included in this package.
+- `index.html` — responsive PayPlan dashboard, recurring bill schedules, and local browser persistence.
+- `payplan-logo.png` — approved logo image used in the header.
 
-## Publish with GitHub Pages
-1. Upload the contents of this folder to the root of the `payplan.github.io` repository in the PayPlan organization.
-2. Commit the files to the `main` branch.
-3. In the repository, open **Settings → Pages**.
-4. Select **Deploy from a branch**, choose `main` and `/(root)`, and save.
-5. Wait for the Pages deployment to complete.
+## Update the live GitHub Pages site
+1. Open the `payplan.github.io` repository in the PayPlan organization.
+2. Upload/replace `index.html` and add `payplan-logo.png` at the repository root.
+3. Commit changes to the branch configured for GitHub Pages.
+4. Wait for deployment, then reload the site. A hard refresh may be needed.
 
-## Prototype limitations
-- Uses sample figures; no account system or persistent storage.
-- Data resets when the page is refreshed.
-- No bank connection, payment processing, or automated notifications.
-- The safe-to-spend number is a simplified estimate, not a guarantee of available funds or financial advice.
-- The icon in the HTML is a temporary lettermark placeholder. Replace it with a cropped/exported transparent logo asset for production.
+## V2 improvements
+- Uses the approved P-and-upward-arrow logo image with tagline.
+- Supports one-time, weekly, every-two-weeks, monthly, and yearly bill schedules.
+- Saves the current prototype's plan and bills in local browser storage.
+- Updates the simplified safe-to-spend estimate using bills due before the next payday and a cash cushion.
 
-## Privacy and security
-Do not enter real bank credentials or sensitive financial information in this demo. Before launching for real users, add a suitable backend, authentication, secure data storage, privacy disclosures, and thoroughly tested financial calculations.
+## Important limitations
+This is still a prototype. Browser storage is local to one browser/device and is not encrypted account storage or cloud sync. Do not use shared devices for sensitive financial information. It is not bank-connected, and estimates do not include every transaction or expense. Validate all calculations before using this with real financial decisions.
